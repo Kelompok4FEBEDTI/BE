@@ -1,0 +1,49 @@
+[{
+	"_id": {
+		"$oid": "5fd79b29aa427f085ce36f40"
+	},
+	"nik": "113",
+	"nama": "Budi Santoso",
+	"username": "penjaga3",
+	"password": "penjaga3",
+	"createdAt": {
+		"$date": "2020-12-14T17:04:41.066Z"
+	},
+	"updatedAt": {
+		"$date": "2020-12-14T17:04:41.066Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5fd79b39aa427f085ce36f41"
+	},
+	"nik": "111",
+	"nama": "Joko Susilo",
+	"username": "penjaga1",
+	"password": "penjaga1",
+	"createdAt": {
+		"$date": "2020-12-14T17:04:57.857Z"
+	},
+	"updatedAt": {
+		"$date": "2020-12-14T17:04:57.857Z"
+	},
+	"__v": 0
+},
+{
+	"_id": {
+		"$oid": "5fd79b49aa427f085ce36f42"
+	},
+	"nik": "112",
+	"nama": "Bambang Sutisno",
+	"username": "penjaga2",
+	"password": "penjaga2",
+	"createdAt": {
+		"$date": "2020-12-14T17:05:13.327Z"
+	},
+	"updatedAt": {
+		"$date": "2020-12-14T17:05:13.327Z"
+	},
+	"__v": 0
+}]
+
