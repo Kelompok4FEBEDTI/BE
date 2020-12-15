@@ -8,8 +8,11 @@ var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var memberparkirRouter = require('./routes/memberparkirRouter');
+var authRouter = require('./routes/auth');
 
 var memberparkir = require('./models/memberparkir');
+var Spotparkir = require('./models/spotparkir');
+const spotparkirRouter = require('./routes/spotparkirRouter');
 
 var app = express();
 var url = 'mongodb://localhost:27017/SiPaDi';
@@ -33,6 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/member', memberparkirRouter);
+app.use('/spotparkir',spotparkirRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
