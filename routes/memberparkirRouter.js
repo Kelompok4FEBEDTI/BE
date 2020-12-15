@@ -16,11 +16,15 @@ memberparkirRouter.route('/')
             res.json(MemberParkir);
         });
     })
-    .post((req, res, next) => {
+    .post((req, res, next) => { console.log(req.body)
         memberparkir.create(req.body).then((MemberParkir) => {
             res.status = 200;
             res.setHeader('Content-type', 'application/json');
             res.json(MemberParkir);
+        }).catch(err =>{
+            console.log(err.message)
+            res.status = 403;
+            res.json(err.message)
         });
     })
     .put((req, res, next) => {
