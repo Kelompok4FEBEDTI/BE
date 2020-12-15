@@ -16,7 +16,7 @@ var Spotparkir = require('./models/spotparkir');
 const spotparkirRouter = require('./routes/spotparkirRouter');
 
 var app = express();
-var url = `mongodb+srv://admin:${process.env.ADMIN}@cluster0.hjzyw.mongodb.net/${process.env.dbname}?retryWrites=true&w=majority` || 'mongodb://localhost:27017/SiPaDi' ;
+var url = `mongodb+srv://admin:${process.env.ADMIN}@cluster0.hjzyw.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority` || 'mongodb://localhost:27017/SiPaDi' ;
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
