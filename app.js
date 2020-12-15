@@ -16,8 +16,14 @@ var Spotparkir = require('./models/spotparkir');
 const spotparkirRouter = require('./routes/spotparkirRouter');
 
 var app = express();
-var url = 'mongodb://localhost:27017/SiPaDi';
-var connect = mongoose.connect(url);
+var url = `mongodb+srv://admin:${process.env.ADMIN}@cluster0.hjzyw.mongodb.net/${process.env.dbname}?retryWrites=true&w=majority` || 'mongodb://localhost:27017/SiPaDi' ;
+const options = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+  family: 4 // Use IPv4, skip trying IPv6
+};
+var connect = mongoose.connect(url,options);
 connect.then((db) => {
   console.log('Berhasil connect Mongo DB');
 }, (err) => {
