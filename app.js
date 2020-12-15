@@ -29,10 +29,11 @@ connect.then((db) => {
   console.log(db);
   console.log('Berhasil connect Mongo DB');
 }, (err) => {
-  console.log(db);
   console.log('Hai Error DB:' + err);
   console.log(`${process.env.DBNAME}`);
-});
+}).catch(err =>{
+  console.log(err,'Erorrrrrrrrrrrrrrrr');
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
