@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var memberparkirRouter = require('./routes/memberparkirRouter');
 var authRouter = require('./routes/auth');
+var penjagaRouter = require('./routes/penjagaRouter');
 
 var memberparkir = require('./models/memberparkir');
 var Spotparkir = require('./models/spotparkir');
@@ -38,6 +39,7 @@ app.use('/users', usersRouter);
 app.use('/member', memberparkirRouter);
 app.use('/spotparkir',spotparkirRouter);
 app.use('/auth', authRouter);
+app.use('/penjaga', penjagaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
