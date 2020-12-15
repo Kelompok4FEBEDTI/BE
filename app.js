@@ -17,6 +17,7 @@ const spotparkirRouter = require('./routes/spotparkirRouter');
 
 var app = express();
 var url = `mongodb+srv://admin:${process.env.ADMIN}@cluster0.hjzyw.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority` || 'mongodb://localhost:27017/SiPaDi' ;
+var url2 = 'mongodb://localhost:27017/SiPaDi';
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -25,6 +26,7 @@ const options = {
 };
 var connect = mongoose.connect(url,options);
 connect.then((db) => {
+  console.log(db);
   console.log('Berhasil connect Mongo DB');
 }, (err) => {
   console.log('Error DB:' + err);
