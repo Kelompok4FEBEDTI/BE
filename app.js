@@ -26,7 +26,7 @@ const options = {
   useFindAndModify: false,
   family: 4 // Use IPv4, skip trying IPv6
 };
-var connect = mongoose.connect(url,options);
+var connect = mongoose.connect(uri,options);
 connect.then((db) => {
   console.log(db);
   console.log('Berhasil connect Mongo DB');
