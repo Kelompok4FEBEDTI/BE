@@ -6,7 +6,6 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var cors = require('cors')
 
-app.use(cors());
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,6 +21,7 @@ var Transaksi = require('./models/transaksi');
 
 var app = express();
 var uri = process.env.MONGODB_URI;
+app.use(cors());
 
 const options = {
   useNewUrlParser: true,
