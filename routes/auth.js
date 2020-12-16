@@ -57,7 +57,7 @@ router.post('/login', function(req,res){
             }).then((e)=>{
                 if(comparePassword(password_member,e.password_member)){
                     const payload = {
-                        username_member: memberlogin.username_member
+                        username_member: e.username_member
                     }
                     const token = signToken(payload)
                     res.status(200).json({
@@ -84,13 +84,18 @@ router.post('/login', function(req,res){
 });
 router.post('/loginPenjaga', function(req,res){
     const {password, username} = req.body
+    console.log(password,username,"Console.1")
         try {
             penjaga.findOne({
                 username
             }).then((e)=>{
+                // console.log("Data E")
+                // console.log(e)
+                // console.log(password,username,"Console.1", e.password)
+
                 if(comparePassword(password,e.password)){
                     const payload = {
-                        username: memberlogin.username
+                        username: e.username
                     }
                     const token = signToken(payload)
                     res.status(200).json({
