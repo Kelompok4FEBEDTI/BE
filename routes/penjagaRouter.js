@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const {penjaga} = require('../models/penjaga');
+const {hashPassword} = require('../helpers/bcrypt')
 
 const penjagaRouter = express.Router();
 
@@ -19,11 +20,18 @@ penjagaRouter.route('/')
         })
     })
     .post((req, res, next)=>{
-        penjaga.create(req.body).then((dataPenjaga)=>{
-            console.log('insert data berhasil');
-            res.status = 200;
-            res.setHeader('Content-type','application/json');
-            res.json(dataPenjaga);
+        const { nik, nama, username} = req.body
+        const newPenjaga = {
+            nik, 
+            nama, 
+            username, 
+            password : hashPassword(req.body.password)
+        }
+        penjaga.create(newPenjaga).then((dataPenjaga)=>{
+            res.status(200).json({
+                data:dataPenjaga.username,
+                message: `Data ${dataPenjaga.username} berhasil di create!`
+            })
         },(err)=>{
             if (err.name == "MongoError" && err.code == 11000){
                 res.status(422).send({ succes: false, error:"Data yang sama di temukan", value: err.keyValue});S

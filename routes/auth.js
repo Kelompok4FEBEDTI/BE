@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-
+const {penjaga} = require('../models/penjaga');
 const {memberparkir} = require('../models/memberparkir');
 const {signToken} = require('../helpers/jwt');
 const {comparePassword} =require('../helpers/bcrypt');
@@ -64,6 +64,39 @@ router.post('/login', function(req,res){
                         token,
                         message: 'Selamat anda telah berhasil login!',
                         nama: e.username_member
+                    })
+                } else {
+                    res.status(404).json({
+                        message: 'User danPassword salah'
+                    })
+                }
+                
+            }).catch(e=>{
+                res.status(404).json({
+                    message: 'User belum terdaftar'
+                })
+            })
+
+        } catch(err){
+            console.log(err)
+            res.status(500).json(err)
+        }
+});
+router.post('/loginPenjaga', function(req,res){
+    const {password, username} = req.body
+        try {
+            penjaga.findOne({
+                username
+            }).then((e)=>{
+                if(comparePassword(password,e.password)){
+                    const payload = {
+                        username: memberlogin.username
+                    }
+                    const token = signToken(payload)
+                    res.status(200).json({
+                        token,
+                        message: 'Selamat anda telah berhasil login!',
+                        nama: e.username
                     })
                 } else {
                     res.status(404).json({
