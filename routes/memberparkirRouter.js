@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const {hashPassword} = require('../helpers/bcrypt')
 
 const {memberparkir, mobil} = require('../models/memberparkir');
 
@@ -17,10 +18,18 @@ memberparkirRouter.route('/')
         });
     })
     .post((req, res, next) => { console.log(req.body)
-        memberparkir.create(req.body).then((MemberParkir) => {
+        const { nik_member, nama_member, jeniskelamin_member,username_member} = req.body
+        const newMember = {
+            nik_member, 
+            nama_member, 
+            jeniskelamin_member,
+            username_member, 
+            password_member : hashPassword(req.body.password_member)
+        }
+        memberparkir.create(newMember).then((MemberParkir) => {
             res.status = 200;
             res.setHeader('Content-type', 'application/json');
-            res.json(MemberParkir);
+            res.json({data: MemberParkir.username_member});
         }).catch(err =>{
             console.log(err.message)
             res.status = 403;

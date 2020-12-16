@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 
 const {memberparkir} = require('../models/memberparkir');
+const {signToken} = require('../helpers/jwt');
+const {comparePassword} =require('../helpers/bcrypt');
 
 /*
 router.get('/register', function(req,res)){
@@ -46,27 +48,35 @@ router.get('/login', function(req,res)){
     //Codingan dari FE untuk tampilan register
 }*/
 router.post('/login', function(req,res){
-    const inputPassword = req.body.password_member
+    console.log(req.body)
+    const {password_member, username_member} = req.body
+    const inputPassword = password_member
         try {
             memberparkir.findOne({
-                username_member: req.body.username_member
-            }).then((MemberParkir) => {
-                res.status = 200;
-                res.setHeader('Content-type', 'application/json');
-                res.json(MemberParkir);
-            });
-            // const databasePassword = user ? user.password : ''
-            // if( !user ){
-            //     throw 'invalid username and password email ga ada woi'
-            // } else if(!comparePassword(inputPassword,databasePassword)){
-            //     throw 'invalid username and password salahwoi'
-            // } else {
-            //     const payload = {
-            //         email: user.email
-            //     }
-            //     const token = signToken(payload)
-            //     res.status(200).json(token)
-            // }
+                username_member
+            }).then((e)=>{
+                if(comparePassword(password_member,e.password_member)){
+                    const payload = {
+                        username_member: memberlogin.username_member
+                    }
+                    const token = signToken(payload)
+                    res.status(200).json({
+                        token,
+                        message: 'Selamat anda telah berhasil login!',
+                        nama: e.username_member
+                    })
+                } else {
+                    res.status(404).json({
+                        message: 'User danPassword salah'
+                    })
+                }
+                
+            }).catch(e=>{
+                res.status(404).json({
+                    message: 'User belum terdaftar'
+                })
+            })
+
         } catch(err){
             console.log(err)
             res.status(500).json(err)
