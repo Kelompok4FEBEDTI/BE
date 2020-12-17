@@ -21,6 +21,7 @@ var Transaksi = require('./models/transaksi');
 
 var app = express();
 var uri = process.env.MONGODB_URI;
+// var uri = "mongodb://localhost:27017/SiPaDi";
 app.use(cors());
 
 const options = {
@@ -29,15 +30,15 @@ const options = {
   useFindAndModify: false,
   family: 4 // Use IPv4, skip trying IPv6
 };
-var connect = mongoose.connect(uri,options);
+var connect = mongoose.connect(uri, options);
 connect.then((db) => {
   console.log(db);
   console.log('Berhasil connect Mongo DB');
 }, (err) => {
   console.log('Hai Error DB:' + err);
   console.log(`${process.env.DBNAME}`);
-}).catch(err =>{
-  console.log(err,'Erorrrrrrrrrrrrrrrr');
+}).catch(err => {
+  console.log(err, 'Erorrrrrrrrrrrrrrrr');
 })
 
 // view engine setup
