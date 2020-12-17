@@ -63,7 +63,8 @@ router.post('/login', function(req,res){
                     res.status(200).json({
                         token,
                         message: 'Selamat anda telah berhasil login!',
-                        nama: e.username_member
+                        nama: e.username_member,
+                        ID: e._id
                     })
                 } else {
                     res.status(404).json({
@@ -101,11 +102,12 @@ router.post('/loginPenjaga', function(req,res){
                     res.status(200).json({
                         token,
                         message: 'Selamat anda telah berhasil login!',
-                        nama: e.username
+                        nama: e.username,
+                        ID: e._id
                     })
                 } else {
                     res.status(404).json({
-                        message: 'User danPassword salah'
+                        message: 'User dan Password salah'
                     })
                 }
                 
