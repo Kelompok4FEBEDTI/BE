@@ -72,8 +72,14 @@ penjagaRouter.route('/:dishId')
         res.end('Post tidak di support');
     })
     .put((req, res, next)=>{
+        const {nik, nama, username, password} = req.body
         penjaga.findByIdAndUpdate(req.params.dishId,{
-            $set: req.body
+            $set: {
+                nik,
+                nama,
+                username,
+                password: hashPassword(req.body.password)
+            }
         }, {new: true})
         .then((dish) => {
             res.status = 200;

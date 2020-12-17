@@ -61,8 +61,15 @@ memberparkirRouter.route('/:memberId')
     res.end('Tidak support untuk POST');
 })
 .put((req, res, next) => {
+    const {nik_member, nama_member, jeniskelamin_member, username_member} = req.body;
     memberparkir.findByIdAndUpdate(req.params.memberId, {
-        $set: req.body
+        $set: {
+            nik_member,
+            nama_member,
+            jeniskelamin_member,
+            username_member,
+            password_member: hashPassword(req.body.password_member)
+        }
     }, {
         new: true
     }).then((MemberParkir) => {
