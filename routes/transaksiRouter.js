@@ -85,7 +85,7 @@ transaksiRouter.route('/:transaksiId')
 
 transaksiRouter.route('/memberHistory/:memberId')
     .get((req, res, next) => {
-        transaksi.findOne({ id_member: req.params.memberId }).then((Transaksi) => {
+        transaksi.find({ id_member: req.params.memberId }).then((Transaksi) => {
             res.status = 200;
             res.setHeader('Content-type', 'application/json');
             res.json(Transaksi);
