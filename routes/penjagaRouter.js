@@ -34,7 +34,7 @@ penjagaRouter.route('/')
             })
         },(err)=>{
             if (err.name == "MongoError" && err.code == 11000){
-                res.status(422).send({ succes: false, error:"Data yang sama di temukan", value: err.keyValue});S
+                res.status(422).send({ succes: false, error:"Data yang sama di temukan", value: err.keyValue});
             }
             else{
                 res.status(404).send(err)
