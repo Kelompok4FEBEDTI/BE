@@ -24,7 +24,7 @@ transaksiRouter.route('/')
             console.log('23 Halooo',jenis);
             transaksi.find({ status_parkir: 'ParkirMasuk' }).then((Transaksi) => {
                 res.status(200).json({
-                    "status":Transaksi[0].status_parkir,
+                    "status":'ParkirMasuk',
                     "total": Transaksi.length,
                     "data": Transaksi.slice(offset, limit)
                 }).catch((err) => {
@@ -37,6 +37,7 @@ transaksiRouter.route('/')
         } else if (jenis == "ParkirKeluar") {
             transaksi.find({ status_parkir: 'ParkirKeluar' }).then((Transaksi) => {
                 res.status(200).json({
+                    "status":'ParkirKeluar',
                     "total": Transaksi.length,
                     "data": Transaksi.slice(offset, limit)
                 }).catch((err) => {
