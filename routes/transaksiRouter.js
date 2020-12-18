@@ -20,7 +20,7 @@ transaksiRouter.route('/')
             transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
                 res.status(200).json({
                     "total": Transaksi.length,
-                    "data": Transaksi.slice(limit, offset)
+                    "data": Transaksi.slice(req.query.limit, req.query.offset)
                 }).catch((err) => {
                     res.status(403).send("json error", err);
                 });
