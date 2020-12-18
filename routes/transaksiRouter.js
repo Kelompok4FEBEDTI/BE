@@ -18,7 +18,7 @@ transaksiRouter.route('/')
         let limit = req.query.limit ? req.query.limit: 10;
         let offset = req.query.offset ? req.query.offset: 0;
         console.log('Line 16',req.query.jenis,limit,offset);
-        console.log(req.query.jenis,ParkirMasuk,typeof('ParkirMasuk'),typeof(req.query.jenis));
+        console.log(req.query.jenis,'ParkirMasuk',typeof('ParkirMasuk'),typeof(req.query.jenis));
         // load data berdasarkan STATUS parkir / jenis
         if (req.query.jenis === "ParkirMasuk") {
             console.log('23 Halooo',jenis);
