@@ -26,9 +26,7 @@ transaksiRouter.route('/')
                     "status":Transaksi[0].status_parkir,
                     "total": Transaksi.length,
                     "data": Transaksi.slice(offset, limit)
-                }).catch((err) => {
-                    res.status(403).send("json error", err);
-                });
+                })
             }).catch((err) => {
                 res.status(403).send("find error", err);
             });
@@ -60,7 +58,9 @@ transaksiRouter.route('/')
             });
 
         } else {
-            transaksi.find({}).then((Transaksi) => {
+            transaksi.find({
+                status_parkir: 'ParkirMasuk'
+            }).then((Transaksi) => {
                 res.status(200).json({
                     status: "from Line 50",
                     "total": Transaksi.length,
