@@ -20,8 +20,10 @@ transaksiRouter.route('/')
         console.log('Line 16',req.query.jenis,limit,offset);
         // load data berdasarkan STATUS parkir / jenis
         if (jenis == "ParkirMasuk") {
+            console.log('23 Halooo',jenis);
             transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
                 res.status(200).json({
+                    "status":Transaksi[0].status_parkir,
                     "total": Transaksi.length,
                     "data": Transaksi.slice(offset, limit)
                 }).catch((err) => {
