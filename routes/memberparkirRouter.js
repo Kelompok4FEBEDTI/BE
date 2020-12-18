@@ -61,7 +61,7 @@ memberparkirRouter.route('/:memberId')
     res.end('Tidak support untuk POST');
 })
 .put((req, res, next) => {
-    const update_password = false;
+    let update_password = false;
     const {nik_member, nama_member, jeniskelamin_member, username_member, password_member} = req.body;
     memberparkir.findById(req.params.memberId).then((e)=>{
         if(e.password_member != password_member){
