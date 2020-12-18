@@ -10,15 +10,61 @@ transaksiRouter.use(bodyParser.json());
 
 transaksiRouter.route('/')
     .get((req, res, next) => { // lihat data
-        transaksi.find({}).then((Transaksi) => {
-            res.status = 200;
-            res.setHeader('Content-type', 'application/json');
-            res.json(Transaksi);
-        }).catch((err) => {
-            res.statusCode = 403;
-            res.send(err);
-        });
+        const { jenis } = req.query;
+        let limit = 0 || req.query;
+        let offset = 10 || req.query;
+        console.log(req.query.jenis);
+        // load data berdasarkan STATUS parkir / jenis
+        if (jenis == "ParkirMasuk") {
+
+            transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
+                res.status(200).json({
+                    "total": Transaksi.length,
+                    "data": Transaksi.slice(limit, offset)
+                }).catch((err) => {
+                    res.status(403).send("json error", err);
+                });
+            }).catch((err) => {
+                res.status(403).send("find error", err);
+            });
+
+        } else if (jenis == "ParkirKeluar") {
+            transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
+                res.status(200).json({
+                    "total": Transaksi.length,
+                    "data": Transaksi.slice(limit, offset)
+                }).catch((err) => {
+                    res.status(403).send("json error", err);
+                });
+            }).catch((err) => {
+                res.status(403).send("find error", err);
+            });
+
+        } else {
+            transaksi.find({}).then((Transaksi) => {
+                res.status(200).json({
+                    "total": Transaksi.length,
+                    "data": Transaksi.slice(limit, offset)
+                })
+            }).catch((err) => {
+                res.statusCode = 403;
+                res.send(err);
+            });
+        }
     })
+
+
+
+    // .get((req, res, next) => { // lihat data
+    //     transaksi.find({}).then((Transaksi) => {
+    //         res.status = 200;
+    //         res.setHeader('Content-type', 'application/json');
+    //         res.json(Transaksi);
+    //     }).catch((err) => {
+    //         res.statusCode = 403;
+    //         res.send(err);
+    //     });
+    // })
     .post((req, res, next) => { // transaksi baru
         transaksi.create(req.body).then((TransaksiBaru) => {
             res.status = 200;
@@ -41,6 +87,8 @@ transaksiRouter.route('/')
             res.end("Data transaksi telah terhapus semua");
         })
     });
+
+
 
 transaksiRouter.route('/:transaksiId')
     .get((req, res, next) => { // lihat salah satu transaksi
