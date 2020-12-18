@@ -61,21 +61,22 @@ memberparkirRouter.route('/:memberId')
     res.end('Tidak support untuk POST');
 })
 .put((req, res, next) => {
+    const update_password = false;
     const {nik_member, nama_member, jeniskelamin_member, username_member, password_member} = req.body;
     memberparkir.findById(req.params.memberId).then((e)=>{
         if(e.password_member != password_member){
-            password_member = hashPassword(req.body.password_member)
+            update_password = hashPassword(password_member);
         } else{
-            console.log("Tidak Ada Update Password")
+            update_password = password_member;
         }
-    })
+    }) 
     memberparkir.findByIdAndUpdate(req.params.memberId, {
         $set: {
             nik_member,
             nama_member,
             jeniskelamin_member,
             username_member,
-            password_member
+            password_member: update_password
         }
     }, {
         new: true
