@@ -21,7 +21,7 @@ var Transaksi = require('./models/transaksi');
 
 var app = express();
 var uri = process.env.MONGODB_URI;
-// var uri = "mongodb://localhost:27017/SiPaDi";
+//var uri = "mongodb://localhost:27017/SiPaDi";
 app.use(cors());
 
 const options = {
