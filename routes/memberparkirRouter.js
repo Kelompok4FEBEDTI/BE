@@ -66,28 +66,43 @@ memberparkirRouter.route('/:memberId')
     memberparkir.findById(req.params.memberId).then((e)=>{
         if(e.password_member != password_member){
             update_password = hashPassword(password_member);
+            memberparkir.findByIdAndUpdate(req.params.memberId, {
+                $set: {
+                    nik_member,
+                    nama_member,
+                    jeniskelamin_member,
+                    username_member,
+                    password_member: update_password
+                }
+            }, {
+                new: true
+            }).then((MemberParkir) => {
+                res.status = 200;
+                res.setHeader('Content-type', 'application/json');
+                res.json(MemberParkir);
+            });
             console.log('69', update_password);
         } else{
             update_password = password_member;
+            memberparkir.findByIdAndUpdate(req.params.memberId, {
+                $set: {
+                    nik_member,
+                    nama_member,
+                    jeniskelamin_member,
+                    username_member,
+                    password_member: update_password
+                }
+            }, {
+                new: true
+            }).then((MemberParkir) => {
+                res.status = 200;
+                res.setHeader('Content-type', 'application/json');
+                res.json(MemberParkir);
+            });
             console.log('71',update_password);
         }
     })
-    console.log('75 ', update_password); 
-    memberparkir.findByIdAndUpdate(req.params.memberId, {
-        $set: {
-            nik_member,
-            nama_member,
-            jeniskelamin_member,
-            username_member,
-            password_member: update_password
-        }
-    }, {
-        new: true
-    }).then((MemberParkir) => {
-        res.status = 200;
-        res.setHeader('Content-type', 'application/json');
-        res.json(MemberParkir);
-    });
+    console.log('75 ', update_password);
 })
 .delete((req, res, next) => {
     memberparkir.findByIdAndDelete(req.params.memberId).then(() => {
