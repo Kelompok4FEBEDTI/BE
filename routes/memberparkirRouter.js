@@ -86,6 +86,16 @@ memberparkirRouter.route('/:memberId')
     });
 });
 
+memberparkirRouter.route('/getmemberbynopol/:nopol')
+    .get((req, res, next) => {
+        var nopolNew = req.params.nopol;
+        memberparkir.find({'mobil.nomor_polisi': nopolNew}).then((MemberParkir) => {
+            res.status = 200;
+            res.setHeader('Content-type', 'application/json');
+            res.json(MemberParkir);
+        });
+    })
+
 memberparkirRouter.route('/:memberId/mobil')
 .get((req, res, next) => {
     memberparkir.findById(req.params.memberId).then((MemberParkir) => {
