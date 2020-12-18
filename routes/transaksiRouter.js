@@ -18,9 +18,8 @@ transaksiRouter.route('/')
         if (jenis == "ParkirMasuk") {
             transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
                 res.status(200).json({
-                    "all": Transaksi,
                     "total": Transaksi.length,
-                    "data": Transaksi.slice(limit, offset)
+                    "data": Transaksi.slice(offset, limit)
                 }).catch((err) => {
                     res.status(403).send("json error", err);
                 });
@@ -32,7 +31,7 @@ transaksiRouter.route('/')
             transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
                 res.status(200).json({
                     "total": Transaksi.length,
-                    "data": Transaksi.slice(limit, offset)
+                    "data": Transaksi.slice(offset, limit)
                 }).catch((err) => {
                     res.status(403).send("json error", err);
                 });
@@ -44,7 +43,7 @@ transaksiRouter.route('/')
             transaksi.find({}).then((Transaksi) => {
                 res.status(200).json({
                     "total": Transaksi.length,
-                    "data": Transaksi.slice(limit, offset)
+                    "data": Transaksi.slice(offset, limit)
                 })
             }).catch((err) => {
                 res.statusCode = 403;
