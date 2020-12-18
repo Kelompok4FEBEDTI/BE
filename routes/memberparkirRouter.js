@@ -71,7 +71,8 @@ memberparkirRouter.route('/:memberId')
             update_password = password_member;
             console.log('71',update_password);
         }
-    }) 
+    })
+    console.log('75 ', update_password); 
     memberparkir.findByIdAndUpdate(req.params.memberId, {
         $set: {
             nik_member,
