@@ -19,7 +19,7 @@ transaksiRouter.route('/')
         let offset = req.query.offset ? req.query.offset: 0;
         console.log('Line 16',req.query.jenis,limit,offset);
         // load data berdasarkan STATUS parkir / jenis
-        if (jenis == "ParkirMasuk") {
+        if (req.query.jenis === "ParkirMasuk") {
             console.log('23 Halooo',jenis);
             transaksi.find({ status_parkir: 'ParkirMasuk' }).then((Transaksi) => {
                 res.status(200).json({
