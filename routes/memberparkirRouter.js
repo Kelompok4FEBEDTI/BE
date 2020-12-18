@@ -66,8 +66,10 @@ memberparkirRouter.route('/:memberId')
     memberparkir.findById(req.params.memberId).then((e)=>{
         if(e.password_member != password_member){
             update_password = hashPassword(password_member);
+            console.log('69', update_password);
         } else{
             update_password = password_member;
+            console.log('71',update_password);
         }
     }) 
     memberparkir.findByIdAndUpdate(req.params.memberId, {
