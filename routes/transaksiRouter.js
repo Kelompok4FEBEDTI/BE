@@ -11,9 +11,13 @@ transaksiRouter.use(bodyParser.json());
 transaksiRouter.route('/')
     .get((req, res, next) => { // lihat data
         const { jenis } = req.query;
-        let limit = req.query.limit ? req.query.limit: 0;
-        let offset = req.query.offset ? req.query.offset: 10;
-        console.log(req.query.jenis);
+        // if (req.query.limit){
+        //     limit = req.query.limit;
+        //     offset = req.query.offset;
+        // }
+        let limit = req.query.limit ? req.query.limit: 10;
+        let offset = req.query.offset ? req.query.offset: 0;
+        console.log('Line 16',req.query.jenis,limit,offset);
         // load data berdasarkan STATUS parkir / jenis
         if (jenis == "ParkirMasuk") {
             transaksi.find({ status_parkir: jenis }).then((Transaksi) => {
