@@ -73,18 +73,40 @@ penjagaRouter.route('/:dishId')
     })
     .put((req, res, next)=>{
         const {nik, nama, username, password} = req.body
-        penjaga.findByIdAndUpdate(req.params.dishId,{
-            $set: {
-                nik,
-                nama,
-                username,
-                password: hashPassword(req.body.password)
+        penjaga.findById(req.params.memberId).then((e)=>{
+            if(e.password != password){
+                update_password = hashPassword(password_member);
+                penjaga.findByIdAndUpdate(req.params.memberId, {
+                    $set: {
+                        nik,
+                        nama,
+                        username,
+                        password: update_password
+                    }
+                }, {
+                    new: true
+                }).then((MemberParkir) => {
+                    res.status = 200;
+                    res.setHeader('Content-type', 'application/json');
+                    res.json(MemberParkir);
+                });
+            } else{
+                update_password = password_member;
+                memberparkir.findByIdAndUpdate(req.params.memberId, {
+                    $set: {
+                        nik,
+                        nama,
+                        username,
+                        password: update_password
+                    }
+                }, {
+                    new: true
+                }).then((MemberParkir) => {
+                    res.status = 200;
+                    res.setHeader('Content-type', 'application/json');
+                    res.json(MemberParkir);
+                });
             }
-        }, {new: true})
-        .then((dish) => {
-            res.status = 200;
-            res.setHeader('Content-type','application/json');
-            res.json(dish);
         },(err)=>{
             if (err.name == "MongoError" && err.code == 11000){
                 res.status(422).send({ succes: false, error:"Data yang sama di temukan", value: err.keyValue});
