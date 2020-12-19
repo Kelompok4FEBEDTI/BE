@@ -42,6 +42,8 @@ spotparkirRouter.route('/:spotparkirId')
             res.status = 200;
             res.setHeader('Content-type','application/json');
             res.json(spotparkir);
+        }, (err)=>{
+            res.status(404).send(err);
         });
     })
     .post((req,res,next)=>{
