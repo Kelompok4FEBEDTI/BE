@@ -95,7 +95,7 @@ penjagaRouter.route('/:dishId')
                 });
             } else{
                 update_password = password;
-                memberparkir.findByIdAndUpdate(req.params.dishId, {
+                penjaga.findByIdAndUpdate(req.params.dishId, {
                     $set: {
                         nik,
                         nama,
