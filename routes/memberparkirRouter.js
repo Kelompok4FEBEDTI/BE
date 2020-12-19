@@ -62,22 +62,44 @@ memberparkirRouter.route('/:memberId')
         res.end('Tidak support untuk POST');
     })
     .put((req, res, next) => {
-        const { nik_member, nama_member, jeniskelamin_member, username_member } = req.body;
-        memberparkir.findByIdAndUpdate(req.params.memberId, {
-            $set: {
-                nik_member,
-                nama_member,
-                jeniskelamin_member,
-                username_member,
-                password_member: hashPassword(req.body.password_member)
+        const { nik_member, nama_member, jeniskelamin_member, username_member, password_member } = req.body;
+        memberparkir.findById(req.params.memberId).then((e)=>{
+            if(e.password_member != password_member){
+                update_password = hashPassword(password_member);
+                memberparkir.findByIdAndUpdate(req.params.memberId, {
+                    $set: {
+                        nik_member,
+                        nama_member,
+                        jeniskelamin_member,
+                        username_member,
+                        password_member: update_password
+                    }
+                }, {
+                    new: true
+                }).then((MemberParkir) => {
+                    res.status = 200;
+                    res.setHeader('Content-type', 'application/json');
+                    res.json(MemberParkir);
+                });
+            } else{
+                update_password = password_member;
+                memberparkir.findByIdAndUpdate(req.params.memberId, {
+                    $set: {
+                        nik_member,
+                        nama_member,
+                        jeniskelamin_member,
+                        username_member,
+                        password_member: update_password
+                    }
+                }, {
+                    new: true
+                }).then((MemberParkir) => {
+                    res.status = 200;
+                    res.setHeader('Content-type', 'application/json');
+                    res.json(MemberParkir);
+                });
             }
-        }, {
-            new: true
-        }).then((MemberParkir) => {
-            res.status = 200;
-            res.setHeader('Content-type', 'application/json');
-            res.json(MemberParkir);
-        });
+        })
     })
     .delete((req, res, next) => {
         memberparkir.findByIdAndDelete(req.params.memberId).then(() => {
