@@ -152,12 +152,12 @@ memberparkirRouter.route('/:memberId/mobil')
 memberparkirRouter.route('/getmemberbynopol/:nopol')
     .get((req, res, next) => {
         var nopolNew = req.params.nopol;
-        memberparkir.find({ 'mobil.nomor_polisi': nopolNew }).then((MemberParkir) => {
+        memberparkir.find({'mobil.nomor_polisi': nopolNew}).then((MemberParkir) => {
             res.status = 200;
             res.setHeader('Content-type', 'application/json');
             res.json(MemberParkir);
         });
-    })
+    });
 
 // (Searching untuk Nama)
 // dishRouter.route('/name/:dishName')
