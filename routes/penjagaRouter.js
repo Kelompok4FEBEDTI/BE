@@ -76,7 +76,7 @@ penjagaRouter.route('/:dishId')
         penjaga.findById(req.params.dishId).then((e)=>{
             if(e.password != password){
                 update_password = hashPassword(password);
-                penjaga.findByIdAndUpdate(req.params.memberId, {
+                penjaga.findByIdAndUpdate(req.params.dishId, {
                     $set: {
                         nik,
                         nama,
