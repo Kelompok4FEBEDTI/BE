@@ -73,7 +73,7 @@ penjagaRouter.route('/:dishId')
     })
     .put((req, res, next)=>{
         const {nik, nama, username, password} = req.body
-        penjaga.findById(req.params.memberId).then((e)=>{
+        penjaga.findById(req.params.dishId).then((e)=>{
             if(e.password != password){
                 update_password = hashPassword(password);
                 penjaga.findByIdAndUpdate(req.params.memberId, {
@@ -95,7 +95,7 @@ penjagaRouter.route('/:dishId')
                 });
             } else{
                 update_password = password;
-                memberparkir.findByIdAndUpdate(req.params.memberId, {
+                memberparkir.findByIdAndUpdate(req.params.dishId, {
                     $set: {
                         nik,
                         nama,
