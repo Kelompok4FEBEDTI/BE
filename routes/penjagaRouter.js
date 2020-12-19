@@ -75,7 +75,7 @@ penjagaRouter.route('/:dishId')
         const {nik, nama, username, password} = req.body
         penjaga.findById(req.params.memberId).then((e)=>{
             if(e.password != password){
-                update_password = hashPassword(password_member);
+                update_password = hashPassword(password);
                 penjaga.findByIdAndUpdate(req.params.memberId, {
                     $set: {
                         nik,
@@ -88,10 +88,13 @@ penjagaRouter.route('/:dishId')
                 }).then((MemberParkir) => {
                     res.status = 200;
                     res.setHeader('Content-type', 'application/json');
-                    res.json(MemberParkir);
+                    res.json({
+                        data: MemberParkir,
+                        msg: 'Berhasil Update Data. Password Berubah'
+                    });
                 });
             } else{
-                update_password = password_member;
+                update_password = password;
                 memberparkir.findByIdAndUpdate(req.params.memberId, {
                     $set: {
                         nik,
@@ -104,7 +107,10 @@ penjagaRouter.route('/:dishId')
                 }).then((MemberParkir) => {
                     res.status = 200;
                     res.setHeader('Content-type', 'application/json');
-                    res.json(MemberParkir);
+                    res.json({
+                        data: MemberParkir,
+                        msg: 'Berhasil Update Data. Password tidak berubah'
+                    });
                 });
             }
         },(err)=>{
