@@ -85,11 +85,11 @@ penjagaRouter.route('/:dishId')
                     }
                 }, {
                     new: true
-                }).then((MemberParkir) => {
+                }).then((dish) => {
                     res.status = 200;
                     res.setHeader('Content-type', 'application/json');
                     res.json({
-                        data: MemberParkir,
+                        data: dish,
                         msg: 'Berhasil Update Data. Password Berubah'
                     });
                 });
@@ -104,11 +104,11 @@ penjagaRouter.route('/:dishId')
                     }
                 }, {
                     new: true
-                }).then((MemberParkir) => {
+                }).then((dish) => {
                     res.status = 200;
                     res.setHeader('Content-type', 'application/json');
                     res.json({
-                        data: MemberParkir,
+                        data: dish,
                         msg: 'Berhasil Update Data. Password tidak berubah'
                     });
                 });
